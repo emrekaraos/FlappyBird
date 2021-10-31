@@ -2,5 +2,18 @@
 
 Scene::Scene(QObject *parent) : QGraphicsScene(parent)
 {
+    setUpPillerTimer();
+}
 
+void Scene::setUpPillerTimer()
+{
+    pillarTimer = new QTimer(this);
+    connect(pillarTimer, &QTimer::timeout, [=](){
+
+            PillarItem *pillarItem = new PillarItem();
+            addItem(pillarItem);
+
+            });
+
+    pillarTimer->start(1000);
 }

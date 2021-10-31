@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "./ui_widget.h"
 #include <QGraphicsPixmapItem>
+#include "pillaritem.h"
 
 
 Widget::Widget(QWidget *parent)
@@ -22,7 +23,8 @@ Widget::Widget(QWidget *parent)
     scene->addLine(-400, 0, 400, 0, QPen(Qt::blue));
     scene->addLine(0, -400, 0, 400, QPen(Qt::blue));
 
-
+//    PillarItem *pillar = new PillarItem();
+//    scene->addItem(pillar);
 
 
     ui->graphicsView->setScene(scene);

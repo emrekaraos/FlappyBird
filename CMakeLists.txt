@@ -27,6 +27,8 @@ set(PROJECT_SOURCES
         #images/sky.png
         scene.cpp
         scene.h
+        pillaritem.cpp
+        pillaritem.h
         images/resource.qrc
 
 
