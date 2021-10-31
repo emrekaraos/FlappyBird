@@ -2,6 +2,7 @@
 #include "./ui_widget.h"
 #include <QGraphicsPixmapItem>
 #include "pillaritem.h"
+#include "birditem.h"
 
 
 Widget::Widget(QWidget *parent)
@@ -26,6 +27,8 @@ Widget::Widget(QWidget *parent)
 //    PillarItem *pillar = new PillarItem();
 //    scene->addItem(pillar);
 
+    BirdItem * bird = new BirdItem(QPixmap(":/bird_blue_up.png"));
+    scene->addItem(bird);
 
     ui->graphicsView->setScene(scene);
 }

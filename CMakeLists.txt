@@ -29,7 +29,10 @@ set(PROJECT_SOURCES
         scene.h
         pillaritem.cpp
         pillaritem.h
+        BirdItem.cpp
+        BirdItem.h
         images/resource.qrc
+
 
 
 )
