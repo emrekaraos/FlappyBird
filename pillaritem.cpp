@@ -2,6 +2,7 @@
 #include <QRandomGenerator>
 #include <QDebug>
 #include <QGraphicsScene>
+#include "birditem.h"
 
 PillarItem::PillarItem() :
     topPillar(new QGraphicsPixmapItem(QPixmap(":/pillar.png"))),
@@ -48,8 +49,30 @@ qreal PillarItem::x() const
     return m_x;
 }
 
+void PillarItem::freezeInPlace()
+{
+    xAnimation->stop();
+}
+
 void PillarItem::setX(qreal x)
 {
     m_x = x;
+    if(collidesWithBird()){
+        emit collideFail();
+    }
     setPos(QPoint(0, 0) + QPointF(x, yPos));
+}
+
+bool PillarItem::collidesWithBird()
+{
+    QList<QGraphicsItem*> collidingItems = topPillar->collidingItems();
+    collidingItems.append(bottomPillar->collidingItems());
+
+    foreach(QGraphicsItem * item, collidingItems){
+        BirdItem *birdItem = dynamic_cast<BirdItem*>(item);
+        if(birdItem){
+            return true;
+        }
+    }
+    return false;
 }

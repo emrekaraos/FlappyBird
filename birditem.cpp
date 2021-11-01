@@ -24,11 +24,11 @@ BirdItem::BirdItem(QPixmap pixmap) :
     yAnimation->setEasingCurve(QEasingCurve::InQuad);
     yAnimation->setDuration(1000);
 
-    yAnimation->start();
+   // yAnimation->start();
 
 
     rotationAnimation = new QPropertyAnimation(this, "rotation", this);
-    rotateTo(90, 1200, QEasingCurve::InQuad);
+    //rotateTo(90, 1200, QEasingCurve::InQuad);
 
 }
 
@@ -90,4 +90,52 @@ void BirdItem::rotateTo(const qreal &end, const int &duration, const QEasingCurv
     rotationAnimation->setDuration(duration);
 
     rotationAnimation->start();
+}
+
+void BirdItem::shootUp()
+{
+    yAnimation->stop();
+    rotationAnimation->stop();
+
+    qreal curPosy = y();
+    yAnimation->setStartValue(curPosy);
+    yAnimation->setEndValue(curPosy - scene()->sceneRect().height()/8);
+    yAnimation->setEasingCurve(QEasingCurve::OutQuad);
+
+    connect(yAnimation, &QPropertyAnimation::finished, [=](){
+            fallToGroundIfNecessary();
+            });
+
+    yAnimation->start();
+
+    rotateTo(-20, 200, QEasingCurve::OutCubic);
+
+}
+
+void BirdItem::fallToGroundIfNecessary()
+{
+    if(y() < groundPosition){
+        rotationAnimation->stop();
+        //yAnimation->stop();
+
+        yAnimation->setStartValue(y());
+        yAnimation->setEasingCurve(QEasingCurve::InQuad);
+        yAnimation->setEndValue(groundPosition);
+        yAnimation->setDuration(1200);
+        yAnimation->start();
+
+        rotateTo(90, 1100, QEasingCurve::InCubic);
+    }
+}
+
+void BirdItem::startFlying()
+{
+    yAnimation->start();
+    rotateTo(90, 1200, QEasingCurve::InQuad);
+}
+
+void BirdItem::freezeInPlace()
+{
+    yAnimation->stop();
+    rotationAnimation->stop();
 }

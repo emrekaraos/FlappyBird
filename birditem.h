@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QPropertyAnimation>
+#include <QGraphicsScene>
 
 class BirdItem : public QObject, public QGraphicsPixmapItem
 {
@@ -15,15 +16,28 @@ public:
 
     qreal rotation() const;
 
-    void setRotation(qreal newRotation);
 
     qreal y() const;
 
-    void setY(qreal newY);
 
-    void rotateTo(const qreal &end, const int &duration, const QEasingCurve &curve);
+
+
+
+
+    void shootUp();
+
+
+
+    void startFlying();
+
+    void freezeInPlace();
 
 signals:
+public slots:
+     void setRotation(qreal newRotation);
+     void rotateTo(const qreal &end, const int &duration, const QEasingCurve &curve);
+     void fallToGroundIfNecessary();
+     void setY(qreal newY);
 
 
 private:

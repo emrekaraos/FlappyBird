@@ -16,14 +16,18 @@ public:
     ~PillarItem();
 
     qreal x() const;;
-    void setX(qreal x);
+
+    void freezeInPlace();
 
 signals:
-
+    void collideFail();
 
 public slots:
-
+    void setX(qreal x);
 private:
+
+    bool collidesWithBird();
+
     QGraphicsPixmapItem *topPillar;
     QGraphicsPixmapItem *bottomPillar;
     QPropertyAnimation *xAnimation;
