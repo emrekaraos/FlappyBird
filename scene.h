@@ -24,6 +24,7 @@ signals:
 
 
 private:
+    void cleanPillars();
     void setUpPillerTimer();
 
     void freezeBirdAndPillarsInPlace();

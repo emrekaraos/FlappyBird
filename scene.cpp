@@ -68,6 +68,12 @@ void Scene::setGameOn(bool newGameOn)
     gameOn = newGameOn;
 }
 
+void Scene::cleanPillars()
+{
+
+
+}
+
 
 void Scene::keyPressEvent(QKeyEvent *event)
 {
