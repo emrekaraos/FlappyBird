@@ -35,6 +35,8 @@ private:
     int yPos;
 
     qreal m_x;
+    bool pastBird;
+
 };
 
 #endif // PILLARITEM_H

@@ -21,8 +21,8 @@ Widget::Widget(QWidget *parent)
                                             pixItem->boundingRect().height()/2));
 
 
-    scene->addLine(-400, 0, 400, 0, QPen(Qt::blue));
-    scene->addLine(0, -400, 0, 400, QPen(Qt::blue));
+//    scene->addLine(-400, 0, 400, 0, QPen(Qt::blue));
+//    scene->addLine(0, -400, 0, 400, QPen(Qt::blue));
 
 //    PillarItem *pillar = new PillarItem();
 //    scene->addItem(pillar);

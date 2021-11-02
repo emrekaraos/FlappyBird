@@ -3,10 +3,12 @@
 #include <QDebug>
 #include <QGraphicsScene>
 #include "birditem.h"
+#include "scene.h"
 
 PillarItem::PillarItem() :
     topPillar(new QGraphicsPixmapItem(QPixmap(":/pillar.png"))),
-    bottomPillar(new QGraphicsPixmapItem(QPixmap(":/pillar.png")))
+    bottomPillar(new QGraphicsPixmapItem(QPixmap(":/pillar.png"))),
+    pastBird(false)
 {
 
     topPillar->setPos(QPointF(0, 0) - QPointF(topPillar->boundingRect().width()/2,
@@ -41,7 +43,8 @@ PillarItem::PillarItem() :
 
 PillarItem::~PillarItem()
 {
-
+    delete topPillar;
+    delete bottomPillar;
 }
 
 qreal PillarItem::x() const
@@ -57,6 +60,17 @@ void PillarItem::freezeInPlace()
 void PillarItem::setX(qreal x)
 {
     m_x = x;
+
+    if(x < 0 && !pastBird)  {
+        pastBird = true;
+        QGraphicsScene *mScene = scene();
+        Scene *myScene = dynamic_cast<Scene* >(mScene);
+        if(myScene){
+            myScene->incrementScore();
+        }
+    }
+
+
     if(collidesWithBird()){
         emit collideFail();
     }

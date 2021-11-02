@@ -19,6 +19,11 @@ public:
     bool getGameOn() const;
     void setGameOn(bool newGameOn);
 
+    void incrementScore();
+
+    int getScore() const;
+    void setScore(int newScore);
+
 signals:
 
 
@@ -36,8 +41,16 @@ private:
 
     // QGraphicsScene interface
 protected:
+    void showGameOverGraphics();
     void keyPressEvent(QKeyEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
+    int score;
+    int bestScore;
+
+    QGraphicsPixmapItem *gameOverPix;
+    QGraphicsTextItem *scoreTextItem;
+
 };
 
 #endif // SCENE_H
